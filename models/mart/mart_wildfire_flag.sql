@@ -1,7 +1,3 @@
-
-sql
-Copy
-Edit
 with flights_weather as (
     select *
     from {{ ref('prep_flights_weather_daily') }}
