@@ -1,10 +1,14 @@
+
+sql
+Copy
+Edit
 with flights_weather as (
     select *
     from {{ ref('prep_flights_weather_daily') }}
 ),
 airports as (
     select *
-    from {{ ref('prep_airports') }}
+    from {{ ref('staging_airports') }}
 )
 select
     f.origin                as airport_code,
@@ -24,15 +28,14 @@ select
         when f.flight_date = '2025-01-08' then 1
         else 0
     end as wildfire_main_day,
-
     case 
         when f.flight_date between '2025-01-07' and '2025-01-14' then 1
         else 0
     end as wildfire_affected_week
-
 from flights_weather f
 left join airports a
     on f.origin = a.faa
+where f.origin in ('LAX', 'BUR', 'ONT', 'SNA', 'SMO')
 group by
     f.origin, a.name, f.flight_date
 order by
