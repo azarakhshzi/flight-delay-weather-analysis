@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ ref('flights_filtered') }}
+    select * from {{ source('flights_data', 'flights_filtered') }}
 )
 select
     cast(flight_date as timestamp)                 as flight_date,
