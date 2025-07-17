@@ -24,8 +24,6 @@ select
     f.distance,
     f.cancelled,
     f.diverted,
-
-    -- All weather columns, no aliases
     w.avg_temp_c,
     w.min_temp_c,
     w.max_temp_c,
