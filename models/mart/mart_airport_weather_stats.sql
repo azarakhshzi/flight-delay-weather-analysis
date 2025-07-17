@@ -4,7 +4,7 @@ with flights_weather as (
 ),
 airports as (
     select *
-    from {{ ref('prep_airports') }}
+    from {{ ref('staging_airports') }}
 )
 select
     f.origin                   as airport_code,
@@ -22,12 +22,15 @@ select
     max(f.max_snow_mm)         as max_snow_mm,
     max(f.avg_wind_direction)  as avg_wind_direction,
     max(f.avg_wind_speed_kmh)  as avg_wind_speed_kmh,
-    max(f.wind_peakgust_kmh)   as wind_peakgust_kmh,
+    max(f.wind_peakgust_kmh)   as max_wind_peakgust_kmh,
     max(f.avg_pressure_hpa)    as avg_pressure_hpa,
     max(f.sun_minutes)         as sun_minutes,
     max(f.season)              as season
 from flights_weather f
 left join airports a
     on f.origin = a.faa
+where f.origin in ('LAX', 'BUR', 'ONT', 'SNA', 'SMO')
 group by
     f.origin, a.name, a.city, f.flight_date
+order by
+    f.origin, f.flight_date
