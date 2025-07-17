@@ -5,6 +5,7 @@ sources:
   schema: g4_dbt_project
   tables:
     - name: weather_hourly_raw
+    - name: weather_daily_raw
 
 - name: flights_data
   schema: g4_dbt_project
