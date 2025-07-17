@@ -14,16 +14,12 @@ select
     avg(f.dep_delay)        as avg_dep_delay,
     avg(f.arr_delay)        as avg_arr_delay,
     sum(f.cancelled)        as num_cancelled,
-
-    -- Weather overlay
     max(f.avg_temp_c)           as avg_temp_c,
     max(f.precipitation_mm)     as precipitation_mm,
     max(f.max_snow_mm)          as max_snow_mm,
     max(f.wind_peakgust_kmh)    as max_wind_peakgust_kmh,
     max(f.sun_minutes)          as max_sun_minutes,
     max(f.season)               as season,
-
-    -- Wildfire event flags
     case 
         when f.flight_date = '2025-01-08' then 1
         else 0
