@@ -4,7 +4,7 @@ with flights as (
 ),
 weather as (
     select *
-    from {{ ref('staging_weather_daily') }}
+    from {{ ref('prep_weather_daily') }}
 )
 select
     f.flight_date,
@@ -24,10 +24,26 @@ select
     f.distance,
     f.cancelled,
     f.diverted,
-    w.temp           as daily_temp,
-    w.precip         as daily_precip,
-    w.weather_event  as daily_weather_event
+
+    -- All weather columns, no aliases
+    w.avg_temp_c,
+    w.min_temp_c,
+    w.max_temp_c,
+    w.precipitation_mm,
+    w.max_snow_mm,
+    w.avg_wind_direction,
+    w.avg_wind_speed_kmh,
+    w.wind_peakgust_kmh,
+    w.avg_pressure_hpa,
+    w.sun_minutes,
+    w.date_day,
+    w.date_month,
+    w.date_year,
+    w.date_week,
+    w.month_name,
+    w.weekday_name,
+    w.season
 from flights f
 left join weather w
     on f.origin = w.airport_code
-    and cast(f.flight_date as date) = cast(w.date as date)
+    and cast(f.flight_date as date) = w.date
