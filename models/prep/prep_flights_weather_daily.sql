@@ -6,7 +6,6 @@ weather as (
     select *
     from {{ ref('staging_weather_daily') }}
 )
-
 select
     f.flight_date,
     f.dep_time,
@@ -30,5 +29,5 @@ select
     w.weather_event  as daily_weather_event
 from flights f
 left join weather w
-    on f.origin = w.airport
+    on f.origin = w.airport_code
     and cast(f.flight_date as date) = cast(w.date as date)
