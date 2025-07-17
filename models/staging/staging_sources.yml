@@ -13,18 +13,4 @@ sources:
     tables:
       - name: flights_filtered
       - name: airports
-=======
-sources:
-
-- name: weather_data
-  schema: g4_dbt_project
-  tables:
-    - name: weather_hourly_raw
-    - name: weather_daily_raw
-
-- name: flights_data
-  schema: g4_dbt_project
-  tables:
-    - name: flights_filtered
-    - name: airports
-    - name: regions
+      - name: regions
