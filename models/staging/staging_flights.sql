@@ -1,7 +1,6 @@
 with source as (
     select * from {{ ref('flights_filtered') }}
 )
-
 select
     cast(flight_date as timestamp)                 as flight_date,
     cast(dep_time as integer)                      as dep_time,
@@ -20,4 +19,4 @@ select
     cast(distance as integer)                      as distance,
     cast(cancelled as integer)                     as cancelled,
     cast(diverted as integer)                      as diverted
-from source
+from source;
