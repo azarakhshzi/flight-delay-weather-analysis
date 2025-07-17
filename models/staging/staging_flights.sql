@@ -19,4 +19,4 @@ select
     cast(distance as integer)                      as distance,
     cast(cancelled as integer)                     as cancelled,
     cast(diverted as integer)                      as diverted
-from source;
+from source
